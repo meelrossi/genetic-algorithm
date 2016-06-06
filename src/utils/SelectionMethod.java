@@ -30,8 +30,35 @@ public enum SelectionMethod {
 			}
 			break;
 		case Roulette:
+			GeneticAlgorithmUtils.setAccumulatedAptitude(population);
+			for(int i = 0; i < n; i++) {
+				double rand = Math.random();
+				boolean found = false;
+				for(int j = 0; j < population.size() && !found; j++) {
+					Individual ind = population.get(j);
+					if(ind.getAccumulatedAptitude() > rand) {
+						selection.add(ind);
+						found = true;
+					}
+				}
+				
+			}
 			break;
 		case Universal:
+			GeneticAlgorithmUtils.setAccumulatedAptitude(population);
+			double rand = Math.random();
+			for(int i = 1; i <= n; i++) {
+				boolean found = false;
+				double randi = (rand + i - 1) / n;
+				for(int j = 0; j < population.size() && !found; j++) {
+					Individual ind = population.get(j);
+					if(ind.getAccumulatedAptitude() > randi) {
+						selection.add(ind);
+						found = true;
+					}
+				}
+				
+			}
 			break;
 		case Boltzman:
 			break;
