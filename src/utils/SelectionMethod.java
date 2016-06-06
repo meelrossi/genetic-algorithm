@@ -12,7 +12,7 @@ public enum SelectionMethod {
 	Roulette,
 	Universal,
 	Boltzman,
-	Tournament,
+	Tournament, //Probabilistic version
 	Ranking;
 	
 	public List<Individual> getSelected(List<Individual> population, int n) {
@@ -63,8 +63,42 @@ public enum SelectionMethod {
 		case Boltzman:
 			break;
 		case Tournament:
+			int k = (int) Math.random() * n;
+			for (int i = 0; i < k; i++) {
+				double decisionRand = Math.random();
+				Individual ind1 = population.get((int) Math.random() * population.size());
+				Individual ind2 = population.get((int) Math.random() * population.size());
+				if (decisionRand > 0.75) {
+					if (ind1.compareTo(ind2) > 0) {
+						selection.add(ind1);
+					} else {
+						selection.add(ind1);
+					}
+				} else {
+					if (ind1.compareTo(ind2) > 0) {
+						selection.add(ind1);
+					} else {
+						selection.add(ind1);
+					}
+				}				
+			}
+			for (int i = k; i < n; i++) {
+				selection.add(population.get((int) Math.random() * population.size()));
+			}
 			break;
 		case Ranking:
+			GeneticAlgorithmUtils.setRankingAptitude(population);
+			for(int i = 1; i <= n; i++) {
+				double rankingRand = Math.random();
+				boolean found = false;
+				for(int j = 0; j < population.size() && !found; j++) {
+					Individual ind = population.get(j);
+					if(ind.getAccumulatedAptitude() > rankingRand) {
+						selection.add(ind);
+						found = true;
+					}
+				}
+			}
 			break;
 		default: break;
 		}
