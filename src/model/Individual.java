@@ -1,42 +1,31 @@
 package model;
 
+import java.util.List;
+
+import utils.CombinationMethod;
+
 public abstract class Individual implements Comparable<Individual> {
-	protected int decimalRepresentation;
-	protected String binaryRepresentation;
+	private Representation representation;
 	protected double fitness;
 	protected double relativeAptitude;
 	protected double accumulatedAptitude;
 
-	public Individual(int decimalRepresentation) {
-		this.decimalRepresentation = decimalRepresentation;
-		this.binaryRepresentation = Integer.toBinaryString(this.decimalRepresentation);
-		setFitness();
-	}
-
-	public Individual(String binaryRepresentation) {
-		this.binaryRepresentation = binaryRepresentation;
-		this.decimalRepresentation = Integer.parseInt(this.binaryRepresentation);
-		setFitness();
+	public Individual() {
 	}
 
 	public double getFitness() {
 		return this.fitness;
 	}
 
-	public int getDecimalRepresentation() {
-		return this.decimalRepresentation;
-	}
-
-	public String getBinaryRepresentation() {
-		return this.binaryRepresentation;
-	}
-
-	public abstract void setFitness();
-
 	public int compareTo(Individual anIndividual) {
 		return new Double(this.fitness).compareTo(anIndividual.fitness);
 	}
-
+	
+	protected void setRepresentation(Representation representation) {
+		this.representation = representation;
+		this.fitness = representation.getFitness();
+	}
+	
 	public void setRelativeAptitude(double relativeAptitude) {
 		this.relativeAptitude = relativeAptitude;
 	}
@@ -51,6 +40,14 @@ public abstract class Individual implements Comparable<Individual> {
 	
 	public double getAccumulatedAptitude() {
 		return accumulatedAptitude;
+	}
+	
+	public Representation getRepresentation() {
+		return this.representation;
+	}
+	
+	public List<Individual> combine(Individual ind, CombinationMethod method) {
+		return method.combine(this.representation, ind.getRepresentation());
 	}
 
 }

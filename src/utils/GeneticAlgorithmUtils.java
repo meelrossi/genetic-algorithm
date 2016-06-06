@@ -8,10 +8,6 @@ import model.SquareXIndividual;
 
 public class GeneticAlgorithmUtils {
 
-	public static int SquareXFitness(int x) {
-		return x * x;
-	}
-
 	public static List<Individual> getSquareXFirstGeneration(int n) {
 		List<Individual> generation = new ArrayList<Individual>();
 		for(int i = 0; i < n; i++) {
