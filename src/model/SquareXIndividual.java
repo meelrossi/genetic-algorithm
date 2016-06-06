@@ -1,19 +1,15 @@
 package model;
 
-import utils.GeneticAlgorithmUtils;
-
 public class SquareXIndividual extends Individual{
 	
 	public SquareXIndividual(int decimalRepresentation) {
-		super(decimalRepresentation);
+		super();
+		setRepresentation(new SquareXRepresentation(decimalRepresentation));
 	}
 	
 	public SquareXIndividual(String binaryRepresentation) {
-		super(binaryRepresentation);
-	}
-
-	public void setFitness() {
-		this.fitness = GeneticAlgorithmUtils.SquareXFitness(this.decimalRepresentation);
+		super();
+		setRepresentation(new SquareXRepresentation(binaryRepresentation));
 	}
 
 }
