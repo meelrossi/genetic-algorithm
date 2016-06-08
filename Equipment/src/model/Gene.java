@@ -19,4 +19,8 @@ public class Gene {
 	public void mutate() {
 		value = (int) Math.random() * (maxValue + 1);
 	}
+	
+	public int maxValue() {
+		return maxValue;
+	}
 }
