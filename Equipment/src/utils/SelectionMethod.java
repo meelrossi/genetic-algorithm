@@ -75,7 +75,7 @@ public enum SelectionMethod {
 			break;
 
 		case Boltzman:
-
+			// TODO
 			break;
 
 		case DeterministicTournament:
@@ -118,6 +118,7 @@ public enum SelectionMethod {
 			break;
 
 		case Ranking:
+			// TODO: Check
 			GeneticAlgorithmUtils.setRankingAptitude(population);
 
 			for (int i = 1; i < n; i++) {
