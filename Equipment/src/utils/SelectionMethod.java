@@ -58,7 +58,7 @@ public enum SelectionMethod {
 			GeneticAlgorithmUtils.setAccumulatedAptitude(population);
 			double rand = Math.random();
 
-			for (int i = 1; i < n; i++) {
+			for (int i = 1; i <= n; i++) {
 				boolean found = false;
 				double randi = (rand + i - 1) / n;
 
