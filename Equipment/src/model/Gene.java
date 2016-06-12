@@ -1,26 +1,26 @@
 package model;
 
 public class Gene {
-	private int value;
-	private int maxValue;
+	private double value;
+	private double maxValue;
 
 	public Gene(int value, int maxValue) {
 		this.value = value;
 	}
 
-	public int getValue() {
+	public double getValue() {
 		return value;
 	}
 
-	public void setValue(int value) {
-		this.value = value;
+	public void setValue(double value2) {
+		this.value = value2;
 	}
 
 	public void mutate() {
 		value = (int) Math.random() * (maxValue + 1);
 	}
 	
-	public int maxValue() {
+	public double maxValue() {
 		return maxValue;
 	}
 }

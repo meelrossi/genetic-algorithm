@@ -16,7 +16,7 @@ public enum MutationMethod {
 				double rand = Math.random();
 				if (rand > 0.5) {
 					Gene gene = chromosome.get(i);
-					int maxValue = gene.maxValue();
+					int maxValue = (int)gene.maxValue();
 					int value = (int)Math.random() * maxValue;
 					gene.setValue(value);
 					chromosome.set(i, gene);
@@ -26,8 +26,8 @@ public enum MutationMethod {
 		case Classic:
 			int rand = (int) Math.random() * chromosome.size();
 			Gene gene = chromosome.get(rand);
-			int maxValue = gene.maxValue();
-			int value = (int)Math.random() * maxValue;
+			double maxValue = gene.maxValue();
+			double value = Math.random() * maxValue;
 			gene.setValue(value);
 			chromosome.set(rand, gene);
 			break;
