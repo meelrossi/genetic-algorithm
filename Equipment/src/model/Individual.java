@@ -17,6 +17,8 @@ public abstract class Individual implements Comparable<Individual> {
 
 	public abstract double getFitness();
 
+	public abstract Individual clone();
+
 	@Override
 	public int compareTo(Individual anIndividual) {
 		return new Double(this.getFitness()).compareTo(anIndividual.getFitness());
