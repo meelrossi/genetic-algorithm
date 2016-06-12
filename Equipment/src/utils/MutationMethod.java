@@ -10,27 +10,26 @@ public enum MutationMethod {
 	
 	public void mutate(Individual individual) {
 		List<Gene> chromosome = individual.getChromosome();
+		int geneIndex;
+
 		switch(this) {
+
 		case NonUniform:
-			for (int i = 0; i < chromosome.size(); i++) {
+			for (geneIndex = 0; geneIndex < chromosome.size(); geneIndex++) {
 				double rand = Math.random();
 				if (rand > 0.5) {
-					Gene gene = chromosome.get(i);
-					int maxValue = (int)gene.maxValue();
-					int value = (int)Math.random() * maxValue;
-					gene.setValue(value);
-					chromosome.set(i, gene);
+					chromosome.get(geneIndex).mutate();
 				}
 			}
+
 			break;
+
 		case Classic:
-			int rand = (int) Math.random() * chromosome.size();
-			Gene gene = chromosome.get(rand);
-			double maxValue = gene.maxValue();
-			double value = Math.random() * maxValue;
-			gene.setValue(value);
-			chromosome.set(rand, gene);
+			geneIndex = (int) Math.random() * chromosome.size();
+			chromosome.get(geneIndex).mutate();
+
 			break;
+
 		}
 	}
 }
