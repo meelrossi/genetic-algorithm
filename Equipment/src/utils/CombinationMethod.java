@@ -13,6 +13,9 @@ public enum CombinationMethod {
 	public List<Individual> combine(Individual ind1, Individual ind2) {
 		List<Individual> combinedIndividuals = new ArrayList<Individual>();
 		int end = ind1.getChromosome().size();
+		int locus1;
+		int locus2;
+		int segment;
 
 		List<Gene> chromosome1 = ind1.getChromosome();
 		List<Gene> chromosome2 = ind2.getChromosome();
@@ -22,19 +25,19 @@ public enum CombinationMethod {
 
 		switch (this) {
 		case OnePoint:
-			int locus = (int) Math.random() * end;
+			locus1 = (int) Math.random() * end;
 
-			newChromosome1.addAll(chromosome1.subList(0, locus));
-			newChromosome1.addAll(chromosome2.subList(locus, end));
+			newChromosome1.addAll(chromosome1.subList(0, locus1));
+			newChromosome1.addAll(chromosome2.subList(locus1, end));
 
-			newChromosome2.addAll(chromosome2.subList(0, locus));
-			newChromosome2.addAll(chromosome1.subList(locus, end));
+			newChromosome2.addAll(chromosome2.subList(0, locus1));
+			newChromosome2.addAll(chromosome1.subList(locus1, end));
 
 			break;
 
 		case TwoPoints:
-			int locus1 = (int) Math.random() * end;
-			int locus2 = (int) Math.random() * (end - locus1) + locus1;
+			locus1 = (int) Math.random() * end;
+			locus2 = (int) Math.random() * (end - locus1) + locus1;
 
 			newChromosome1.addAll(chromosome1.subList(0, locus1));
 			newChromosome1.addAll(chromosome2.subList(locus1, locus2));
@@ -46,7 +49,29 @@ public enum CombinationMethod {
 
 			break;
 		case Anular:
-			
+			locus1 = (int) Math.random() * end;
+			segment = (int) Math.random() * end / 2;
+
+			if (locus1 + segment > end) {
+				int overflow = locus1 + segment - end;
+
+				newChromosome1.addAll(chromosome2.subList(0, overflow));
+				newChromosome1.addAll(chromosome1.subList(overflow, locus1));
+				newChromosome1.addAll(chromosome2.subList(locus1, end));
+
+				newChromosome2.addAll(chromosome1.subList(0, overflow));
+				newChromosome2.addAll(chromosome2.subList(overflow, locus1));
+				newChromosome2.addAll(chromosome1.subList(locus1, end));
+			} else {
+				newChromosome1.addAll(chromosome1.subList(0, locus1));
+				newChromosome1.addAll(chromosome2.subList(locus1, locus1 + segment));
+				newChromosome1.addAll(chromosome1.subList(locus1 + segment, end));
+
+				newChromosome2.addAll(chromosome2.subList(0, locus1));
+				newChromosome2.addAll(chromosome1.subList(locus1, locus1 + segment));
+				newChromosome2.addAll(chromosome2.subList(locus1 + segment, end));
+			}
+
 			break;
 		case Uniform:
 			for (int i = 0; i < end; i++) {
