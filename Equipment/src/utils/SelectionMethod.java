@@ -80,6 +80,17 @@ public enum SelectionMethod {
 
 		case DeterministicTournament:
 
+			for (int i = 0; i < n; i++) {
+				Individual ind1 = population.get((int) Math.random() * population.size());
+				Individual ind2 = population.get((int) Math.random() * population.size());
+
+				if (ind1.compareTo(ind2) > 0) {
+					selection.add(ind1.clone());
+				} else {
+					selection.add(ind2.clone());
+				}
+			}
+
 			break;
 
 		case ProbabilisticTournament:
