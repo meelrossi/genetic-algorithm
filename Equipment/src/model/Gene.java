@@ -4,23 +4,24 @@ public class Gene {
 	private double value;
 	private double maxValue;
 
-	public Gene(int value, int maxValue) {
+	public Gene(double value, double maxValue) {
 		this.value = value;
+		this.maxValue = maxValue;
 	}
 
 	public double getValue() {
-		return value;
+		return this.value;
 	}
 
-	public void setValue(double value2) {
-		this.value = value2;
-	}
-
-	public void mutate() {
-		value = (int) Math.random() * (maxValue + 1);
+	public void setValue(double value) {
+		this.value = value;
 	}
 	
 	public double maxValue() {
-		return maxValue;
+		return this.maxValue;
+	}
+
+	public void mutate() {
+		this.value = Math.random() * this.maxValue;
 	}
 }
