@@ -12,6 +12,7 @@ public enum SelectionMethod {
 	Roulette,
 	Universal,
 	Boltzman,
+	DeterministicTournament,
 	ProbabilisticTournament,
 	Ranking;
 	
@@ -74,6 +75,10 @@ public enum SelectionMethod {
 			break;
 
 		case Boltzman:
+
+			break;
+
+		case DeterministicTournament:
 
 			break;
 
