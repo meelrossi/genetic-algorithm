@@ -9,7 +9,6 @@ public class Equipment {
 	private double skill;
 
 	public Equipment(int id, double strength, double agility, double skill, double resistance, double life) {
-		super();
 		this.id = id;
 		this.strength = strength;
 		this.agility = agility;
