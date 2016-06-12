@@ -4,11 +4,11 @@ import java.util.List;
 
 public class WarriorIndividual extends Individual {
 
-	private double STRENGTH_COEF = 1.1;
-	private double AGILITY_COEF = 0.6;
-	private double SKILL_COEF = 0.5;
-	private double RESISTANCE_COEF = 1.2;
-	private double LIFE_COEF = 1.1;
+	private static double STRENGTH_COEF = 1.1;
+	private static double AGILITY_COEF = 0.6;
+	private static double SKILL_COEF = 0.5;
+	private static double RESISTANCE_COEF = 1.2;
+	private static double LIFE_COEF = 1.1;
 
 	private double strength;
 	private double agility;
@@ -78,12 +78,12 @@ public class WarriorIndividual extends Individual {
 	}
 
 	public double getATM() {
-		double h = chromosome.get(5).getValue();
+		double h = chromosome.get(ChromosomeIndexes.HEIGHT.index()).getValue();
 		return 0.5 - Math.pow(3 * h - 5, 4) + Math.pow(3 * h - 5, 2) + h / 2;
 	}
 	
 	public double getDEM() {
-		double h = chromosome.get(5).getValue();
+		double h = chromosome.get(ChromosomeIndexes.HEIGHT.index()).getValue();
 		return 2 + Math.pow(3 * h - 5, 4) - Math.pow(3 * h - 5, 2) - h / 2;
 	}
 
