@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class WarriorIndividual extends Individual {
@@ -90,5 +91,16 @@ public class WarriorIndividual extends Individual {
 	@Override
 	public double getFitness() {
 		return 0.6 * getAttack() + 0.4 * getDeffense();
+	}
+
+	@Override
+	public Individual clone() {
+		List<Gene> cloneChromosome = new ArrayList<Gene>();
+
+		for (Gene gene : this.chromosome) {
+			cloneChromosome.add(gene.clone());
+		}
+
+		return new WarriorIndividual(cloneChromosome);
 	}
 }
