@@ -3,9 +3,9 @@ package utils;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Fitness;
 import model.Gene;
 import model.Individual;
+import model.WarriorIndividual;
 
 public enum CombinationMethod {
 	OnePoint, TwoPoints, Anular, Uniform;
@@ -19,8 +19,6 @@ public enum CombinationMethod {
 
 		List<Gene> newChromosome1 = new ArrayList<Gene>();
 		List<Gene> newChromosome2 = new ArrayList<Gene>();
-
-		Fitness fitness = ind1.getFitnessAlgorithm();
 
 		switch (this) {
 		case OnePoint:
@@ -66,8 +64,8 @@ public enum CombinationMethod {
 			break;
 		}
 
-		combinedIndividuals.add(new Individual(newChromosome1, fitness));
-		combinedIndividuals.add(new Individual(newChromosome2, fitness));
+		combinedIndividuals.add(new WarriorIndividual(newChromosome1));
+		combinedIndividuals.add(new WarriorIndividual(newChromosome2));
 		return combinedIndividuals;
 	}
 }
