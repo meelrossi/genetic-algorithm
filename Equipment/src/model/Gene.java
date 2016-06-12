@@ -24,4 +24,8 @@ public class Gene {
 	public void mutate() {
 		this.value = Math.random() * this.maxValue;
 	}
+
+	public Gene clone() {
+		return new Gene(value, maxValue);
+	}
 }
