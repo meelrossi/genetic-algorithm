@@ -29,7 +29,7 @@ public class EquipmentAlgorithm {
 	public List<ProblemIndividual> getWarriorPopulation() {
 		List<ProblemIndividual> warriors = new ArrayList<ProblemIndividual>();
 		List<List<Equipment>> equipments = EquipmentManager.instance().getEquipments();
-		for(int i = 1; i < properties.getPopulationSize(); i++) {
+		for(int i = 0; i < properties.getPopulationSize(); i++) {
 			List<Gene> chromosome = new ArrayList<Gene>();
 			equipments.forEach(list -> chromosome.add(new Gene(Math.random() * list.size(), 0, list.size())));
 			chromosome.add(new Gene(Math.random() * (MAX_H - MIN_H) + MIN_H, MIN_H, MAX_H));
