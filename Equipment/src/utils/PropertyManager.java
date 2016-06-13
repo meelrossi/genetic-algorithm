@@ -50,20 +50,36 @@ public class PropertyManager {
 		this.selectionMethodOne = new MethodPercentage(
 				SelectionMethod.valueOf(properties.getProperty("selectionOne", "Elitte")),
 				Double.parseDouble(properties.getProperty("selectionOnePercentage", "1")));
+
+		if (selectionMethodOne.getPercentage() > 1) {
+			throw new RuntimeException("Invalid selectionOnePercentage argument. Must be between 0 and 1.");
+		}
+
 		this.selectionMethodTwo = new MethodPercentage(
 				SelectionMethod.valueOf(properties.getProperty("selectionTwo", "Roulette")),
-				Double.parseDouble(properties.getProperty("selectionTwoPercentage", "0")));
+				1 - selectionMethodOne.getPercentage());
+
 		this.replacementMethodOne = new MethodPercentage(
 				SelectionMethod.valueOf(properties.getProperty("replacementOne", "Elitte")),
 				Double.parseDouble(properties.getProperty("replacementOnePercentage", "1")));
+
+		if (replacementMethodOne.getPercentage() > 1) {
+			throw new RuntimeException("Invalid replacementOnePercentage argument. Must be between 0 and 1.");
+		}
+
 		this.replacementMethodTwo = new MethodPercentage(
 				SelectionMethod.valueOf(properties.getProperty("replacementTwo", "Roulette")),
-				Double.parseDouble(properties.getProperty("replacementTwoPercentage", "0")));
+				1 - replacementMethodOne.getPercentage());
+
 		this.populationSize = Integer.parseInt(properties.getProperty("populationSize", "20"));
+
 		this.mutationMethod = MutationMethod.valueOf(properties.getProperty("mutation", "Classic"));
+
 		this.cutoffCriteria = CutOffCriteriaEnum.valueOf(properties.getProperty("cutoffCriteria", "Generation"))
 				.getCriteriaClass(Double.parseDouble(properties.getProperty("cutoffParameter", "0")));
+
 		this.combinationMethod = CombinationMethod.valueOf(properties.getProperty("combination", "OnePoint"));
+
 		this.replacementMethod = ReplacementMethod.valueOf(properties.getProperty("replacementMethod", "ReplaceAll"));
 
 	}
