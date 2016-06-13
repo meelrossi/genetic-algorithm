@@ -1,19 +1,24 @@
 package model;
 
 public class Equipment {
+	private int id;
 	private double strength;
 	private double agility;
 	private double life;
 	private double resistance;
 	private double skill;
 
-	public Equipment(double strength, double agility, double life, double resistance, double skill) {
-		super();
+	public Equipment(int id, double strength, double agility, double skill, double resistance, double life) {
+		this.id = id;
 		this.strength = strength;
 		this.agility = agility;
 		this.life = life;
 		this.resistance = resistance;
 		this.skill = skill;
+	}
+	
+	public int getId() {
+		return id;
 	}
 
 	public double getStrength() {
