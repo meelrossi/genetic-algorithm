@@ -5,6 +5,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
+import utils.cutoff.CutOffCriteria;
+import utils.cutoff.CutOffCriteriaEnum;
+
 public class PropertyManager {
 	private Properties properties;
 	private FileInputStream fileIn;
@@ -57,7 +60,8 @@ public class PropertyManager {
 				Double.parseDouble(properties.getProperty("replacementTwoPercentage", "0")));
 		this.populationSize = Integer.parseInt(properties.getProperty("populationSize", "20"));
 		this.mutationMethod = MutationMethod.valueOf(properties.getProperty("mutation", "Classic"));
-		this.cutoffCriteria = CutOffCriteria.valueOf(properties.getProperty("cutoffCriteria", "Generation"));
+		this.cutoffCriteria = CutOffCriteriaEnum.valueOf(properties.getProperty("cutoffCriteria", "Generation"))
+				.getCriteriaClass(Double.parseDouble(properties.getProperty("cutoffParameter", "0")));
 		this.combinationMethod = CombinationMethod.valueOf(properties.getProperty("combination", "OnePoint"));
 
 	}
