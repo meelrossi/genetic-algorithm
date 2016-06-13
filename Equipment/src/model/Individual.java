@@ -16,7 +16,6 @@ public abstract class Individual implements Comparable<Individual> {
 	}
 
 	public abstract double getFitness();
-
 	public abstract Individual clone();
 
 	@Override
