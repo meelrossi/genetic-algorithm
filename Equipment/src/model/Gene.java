@@ -2,11 +2,12 @@ package model;
 
 public class Gene {
 	private double value;
-	private double maxValue;
 	private double minValue;
+	private double maxValue;
 
 	public Gene(double value, double minValue, double maxValue) {
 		this.value = value;
+		this.minValue = minValue;
 		this.maxValue = maxValue;
 	}
 
