@@ -11,7 +11,7 @@ public enum SelectionMethod {
 	Random,
 	Roulette,
 	Universal,
-	Boltzman,
+	Boltzmann,
 	DeterministicTournament,
 	ProbabilisticTournament,
 	Ranking;
@@ -74,8 +74,22 @@ public enum SelectionMethod {
 
 			break;
 
-		case Boltzman:
-			// TODO
+		case Boltzmann:
+			BoltzmannUtils.instance().calculateForRoulette(population);
+
+			for (int i = 0; i < n; i++) {
+				double r = Math.random();
+				boolean found = false;
+
+				for (int j = 0; j < population.size() && !found; j++) {
+					Individual ind = population.get(j);
+					if (ind.getAccumulatedAptitude() > r) {
+						selection.add(ind.clone());
+						found = true;
+					}
+				}
+			}
+
 			break;
 
 		case DeterministicTournament:
