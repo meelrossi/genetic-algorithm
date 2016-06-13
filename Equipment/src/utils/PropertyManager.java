@@ -60,7 +60,8 @@ public class PropertyManager {
 				Double.parseDouble(properties.getProperty("replacementTwoPercentage", "0")));
 		this.populationSize = Integer.parseInt(properties.getProperty("populationSize", "20"));
 		this.mutationMethod = MutationMethod.valueOf(properties.getProperty("mutation", "Classic"));
-		this.cutoffCriteria = CutOffCriteriaEnum.valueOf(properties.getProperty("cutoffCriteria", "Generation")).getCriteriaClass();
+		this.cutoffCriteria = CutOffCriteriaEnum.valueOf(properties.getProperty("cutoffCriteria", "Generation"))
+				.getCriteriaClass(Double.parseDouble(properties.getProperty("cutoffParameter", "0")));
 		this.combinationMethod = CombinationMethod.valueOf(properties.getProperty("combination", "OnePoint"));
 
 	}

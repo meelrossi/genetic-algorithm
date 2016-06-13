@@ -1,21 +1,18 @@
 package utils.cutoff;
 
 public enum CutOffCriteriaEnum {
-	Structure,
-	Content,
-	Generation,
-	Optimal;
-	
-	public CutOffCriteria getCriteriaClass() {
-		switch(this) {
+	Structure, Content, Generation, Optimal;
+
+	public CutOffCriteria getCriteriaClass(double parameter) {
+		switch (this) {
 		case Structure:
-			return new StructureCriteria();
+			return new StructureCriteria(parameter);
 		case Content:
-			return new ContentCriteria();
+			return new ContentCriteria(parameter);
 		case Generation:
-			return new GenerationCriteria();
+			return new GenerationCriteria(parameter);
 		case Optimal:
-			return new OptimalCriteria();
+			return new OptimalCriteria(parameter);
 		default:
 			return null;
 		}
