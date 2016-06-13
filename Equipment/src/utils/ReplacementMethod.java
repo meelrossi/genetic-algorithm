@@ -44,7 +44,7 @@ public enum ReplacementMethod {
 
 		}
 
-		return newPopulation;
+		return newPopulation.subList(0, population.size());
 	}
 
 }
