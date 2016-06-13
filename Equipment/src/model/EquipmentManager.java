@@ -36,6 +36,10 @@ public class EquipmentManager {
 		readFile("files/cascos.tsv", equipments.get(ChromosomeIndexes.HELMET.index()));
 		readFile("files/botas.tsv", equipments.get(ChromosomeIndexes.BOOTS.index()));
 	}
+	
+	public List<List<Equipment>> getEquipments() {
+		return this.equipments;
+	}
 
 	private void readFile(String filename, List<Equipment> outputList) {		
 		try {
