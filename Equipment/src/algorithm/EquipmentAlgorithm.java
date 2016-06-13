@@ -19,11 +19,11 @@ public class EquipmentAlgorithm {
 
 	public EquipmentAlgorithm() {
 		this.properties = new PropertyManager();
+		EquipmentManager manager = EquipmentManager.instance();
 		this.population = getWarriorPopulation();
 	}
 
 	public void run() {
-		EquipmentManager manager = EquipmentManager.instance();
 	}
 	
 	public List<ProblemIndividual> getWarriorPopulation() {

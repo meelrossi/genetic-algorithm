@@ -21,6 +21,7 @@ public class PropertyManager {
 	private MutationMethod mutationMethod;
 	private CutOffCriteria cutoffCriteria;
 	private CombinationMethod combinationMethod;
+	private ReplacementMethod replacementMethod;
 
 	public PropertyManager() {
 		properties = new Properties();
@@ -63,6 +64,7 @@ public class PropertyManager {
 		this.cutoffCriteria = CutOffCriteriaEnum.valueOf(properties.getProperty("cutoffCriteria", "Generation"))
 				.getCriteriaClass(Double.parseDouble(properties.getProperty("cutoffParameter", "0")));
 		this.combinationMethod = CombinationMethod.valueOf(properties.getProperty("combination", "OnePoint"));
+		this.replacementMethod = ReplacementMethod.valueOf(properties.getProperty("replacementMethod", "ReplaceAll"));
 
 	}
 
@@ -96,6 +98,10 @@ public class PropertyManager {
 
 	public CombinationMethod getCombinationMethod() {
 		return this.combinationMethod;
+	}
+
+	public ReplacementMethod getReplacementMethod() {
+		return this.replacementMethod;
 	}
 
 }
