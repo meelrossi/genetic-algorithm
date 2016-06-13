@@ -132,15 +132,15 @@ public enum SelectionMethod {
 			break;
 
 		case Ranking:
-			// TODO: Check
-			GeneticAlgorithmUtils.setRankingAptitude(population);
+			List<Individual> populationAux = new ArrayList<Individual>(population);
+			GeneticAlgorithmUtils.setRankingAptitude(populationAux);
 
-			for (int i = 1; i < n; i++) {
+			for (int i = 0; i < n; i++) {
 				double rankingRand = Math.random();
 				boolean found = false;
 
-				for (int j = 0; j < population.size() && !found; j++) {
-					Individual ind = population.get(j);
+				for (int j = 0; j < populationAux.size() && !found; j++) {
+					Individual ind = populationAux.get(j);
 					if (ind.getAccumulatedAptitude() > rankingRand) {
 						selection.add(ind.clone());
 						found = true;
