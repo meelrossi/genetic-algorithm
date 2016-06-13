@@ -125,4 +125,7 @@ public class PropertyManager {
 		return this.replacementMethod;
 	}
 
+	public int getK() {
+		return this.k;
+	}
 }

@@ -13,6 +13,7 @@ public enum ReplacementMethod {
 			MethodPercentage replaceMethodTwo) {
 
 		List<Individual> newPopulation = new ArrayList<Individual>();
+		int originalPopulationSize = population.size();
 
 		switch (this) {
 		case ReplaceAll:
@@ -21,7 +22,7 @@ public enum ReplacementMethod {
 			break;
 
 		case ChooseK:
-			int oldGenerationSize = population.size() - newGeneration.size();
+			int oldGenerationSize = originalPopulationSize - newGeneration.size();
 
 			newPopulation.addAll(replaceMethodOne.getMethod().getSelected(
 					population, (int) Math.floor(oldGenerationSize * replaceMethodOne.getPercentage())));
@@ -36,15 +37,15 @@ public enum ReplacementMethod {
 			population.addAll(newGeneration);
 
 			newPopulation.addAll(replaceMethodOne.getMethod().getSelected(
-					population, (int) Math.floor(population.size() * replaceMethodOne.getPercentage())));
+					population, (int) Math.floor(originalPopulationSize * replaceMethodOne.getPercentage())));
 			newPopulation.addAll(replaceMethodTwo.getMethod().getSelected(
-					population, (int) Math.ceil(population.size() * replaceMethodTwo.getPercentage())));
+					population, (int) Math.ceil(originalPopulationSize * replaceMethodTwo.getPercentage())));
 
 			break;
 
 		}
 
-		return newPopulation.subList(0, population.size());
+		return newPopulation.subList(0, originalPopulationSize);
 	}
 
 }
