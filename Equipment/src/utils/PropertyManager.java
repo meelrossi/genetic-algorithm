@@ -22,6 +22,7 @@ public class PropertyManager {
 	private CutOffCriteria cutoffCriteria;
 	private CombinationMethod combinationMethod;
 	private ReplacementMethod replacementMethod;
+	private int k;
 
 	public PropertyManager() {
 		properties = new Properties();
@@ -81,7 +82,11 @@ public class PropertyManager {
 		this.combinationMethod = CombinationMethod.valueOf(properties.getProperty("combination", "OnePoint"));
 
 		this.replacementMethod = ReplacementMethod.valueOf(properties.getProperty("replacementMethod", "ReplaceAll"));
+		this.k = Integer.parseInt(properties.getProperty("k", "20"));
 
+		if (this.k > this.populationSize) {
+			throw new RuntimeException("Invalid k argument. Must be between 1 and populationSize.");
+		}
 	}
 
 	public MethodPercentage getSelectionMethodOne() {
