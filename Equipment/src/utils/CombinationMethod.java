@@ -4,21 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Gene;
-import model.Individual;
-import model.WarriorIndividual;
 
 public enum CombinationMethod {
 	OnePoint, TwoPoints, Anular, Uniform;
 
-	public List<Individual> combine(Individual ind1, Individual ind2) {
-		List<Individual> combinedIndividuals = new ArrayList<Individual>();
-		int end = ind1.getChromosome().size();
+	public List<List<Gene>> combine(List<Gene> ind1Chromosome, List<Gene> ind2Chromosome) {
+		List<List<Gene>> combinedChromosomes = new ArrayList<List<Gene>>();
+		int end = ind1Chromosome.size();
 		int locus1;
 		int locus2;
 		int segment;
 
-		List<Gene> chromosome1 = ind1.getChromosome();
-		List<Gene> chromosome2 = ind2.getChromosome();
+		List<Gene> chromosome1 = new ArrayList<Gene>();
+		List<Gene> chromosome2 = new ArrayList<Gene>();
+		ind1Chromosome.forEach(gene -> chromosome1.add(gene.clone()));
+		ind2Chromosome.forEach(gene -> chromosome2.add(gene.clone()));
 
 		List<Gene> newChromosome1 = new ArrayList<Gene>();
 		List<Gene> newChromosome2 = new ArrayList<Gene>();
@@ -89,8 +89,8 @@ public enum CombinationMethod {
 			break;
 		}
 
-		combinedIndividuals.add(new WarriorIndividual(newChromosome1));
-		combinedIndividuals.add(new WarriorIndividual(newChromosome2));
-		return combinedIndividuals;
+		combinedChromosomes.add(newChromosome1);
+		combinedChromosomes.add(newChromosome2);
+		return combinedChromosomes;
 	}
 }
