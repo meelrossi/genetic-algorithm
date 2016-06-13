@@ -8,22 +8,32 @@ import java.util.Properties;
 public class PropertyManager {
 	private Properties properties;
 	private FileInputStream fileIn;
-	
+
+	// Algorithm Properties
+	private MethodPercentage selectionMethodOne;
+	private MethodPercentage selectionMethodTwo;
+	private MethodPercentage replacementMethodOne;
+	private MethodPercentage replacementMethodTwo;
+	private int populationSize;
+	private MutationMethod mutationMethod;
+	private CutOffCriteria cutoffCriteria;
+	private CombinationMethod combinationMethod;
+
 	public PropertyManager() {
 		properties = new Properties();
 		FileInputStream fileIn;
 		try {
-			
+
 			fileIn = new FileInputStream("files/algorithm.properties");
 			properties.load(fileIn);
-			
+			loadProperties();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void close() {
 		try {
 			fileIn.close();
@@ -31,28 +41,57 @@ public class PropertyManager {
 			e.printStackTrace();
 		}
 	}
-	
-	public String getProperty(String propertyName) {
-		return properties.getProperty(propertyName);
-	}
-	
-	public String getProperty(String propertyName, String defaultValue) {
-		return properties.getProperty(propertyName, defaultValue);
+
+	private void loadProperties() {
+		this.selectionMethodOne = new MethodPercentage(
+				SelectionMethod.valueOf(properties.getProperty("selectionOne", "Elitte")),
+				Double.parseDouble(properties.getProperty("selectionOnePercentage", "1")));
+		this.selectionMethodTwo = new MethodPercentage(
+				SelectionMethod.valueOf(properties.getProperty("selectionTwo", "Roulette")),
+				Double.parseDouble(properties.getProperty("selectionTwoPercentage", "0")));
+		this.replacementMethodOne = new MethodPercentage(
+				SelectionMethod.valueOf(properties.getProperty("replacementOne", "Elitte")),
+				Double.parseDouble(properties.getProperty("replacementOnePercentage", "1")));
+		this.replacementMethodTwo = new MethodPercentage(
+				SelectionMethod.valueOf(properties.getProperty("replacementTwo", "Roulette")),
+				Double.parseDouble(properties.getProperty("replacementTwoPercentage", "0")));
+		this.populationSize = Integer.parseInt(properties.getProperty("populationSize", "20"));
+		this.mutationMethod = MutationMethod.valueOf(properties.getProperty("mutation", "Classic"));
+		this.cutoffCriteria = CutOffCriteria.valueOf(properties.getProperty("cutoffCriteria", "Generation"));
+		this.combinationMethod = CombinationMethod.valueOf(properties.getProperty("combination", "OnePoint"));
+
 	}
 
-	public SelectionMethod getSelMethodOne() {
-		return SelectionMethod.valueOf(properties.getProperty("selMethodOne", "Elitte"));
+	public MethodPercentage getSelectionMethodOne() {
+		return this.selectionMethodOne;
 	}
 
-	public double getMethodOnePercentage() {
-		return Double.parseDouble(properties.getProperty("selMethodOnePerc", "1"));
+	public MethodPercentage getSelectionMethodTwo() {
+		return this.selectionMethodTwo;
 	}
 
-	public SelectionMethod getSelMethodTwo() {
-		return SelectionMethod.valueOf(properties.getProperty("selMethodTwo", "Roulette"));
+	public MethodPercentage getReplacementMethodOne() {
+		return this.replacementMethodOne;
 	}
 
-	public double getSelMethodTwoPercentage() {
-		return Double.parseDouble(properties.getProperty("selMethodTwoPerc", "0"));
+	public MethodPercentage getReplacementMethodTwo() {
+		return this.replacementMethodTwo;
 	}
+
+	public int getPopulationSize() {
+		return this.populationSize;
+	}
+
+	public MutationMethod getMutationMethod() {
+		return this.mutationMethod;
+	}
+
+	public CutOffCriteria getCutOffCriteria() {
+		return this.cutoffCriteria;
+	}
+
+	public CombinationMethod getCombinationMethod() {
+		return this.combinationMethod;
+	}
+
 }
