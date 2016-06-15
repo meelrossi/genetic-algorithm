@@ -1,9 +1,13 @@
 package algorithm;
 
+import model.Individual;
+
 public class Test {
 
 	public static void main(String[] args) {
 		EquipmentAlgorithm ea = new EquipmentAlgorithm();
-		ea.run();
+		Individual ind = ea.run();
+		
+		System.out.println(ind.getFitness());
 	}
 }

@@ -3,16 +3,29 @@ package model;
 import java.util.List;
 
 public abstract class Individual implements Comparable<Individual> {
+	private static int next_id = 0;
+	
+	protected int id;
 	protected double relativeAptitude;
 	protected double accumulatedAptitude;
 	protected List<Gene> chromosome;
 
 	public Individual(List<Gene> chromosome) {
+		this.id = ++Individual.next_id;
+		this.chromosome = chromosome;
+	}
+	
+	public Individual(int id, List<Gene> chromosome) {
+		this.id = id;
 		this.chromosome = chromosome;
 	}
 
 	public List<Gene> getChromosome() {
 		return chromosome;
+	}
+	
+	public int getId() {
+		return this.id;
 	}
 
 	public abstract double getFitness();
