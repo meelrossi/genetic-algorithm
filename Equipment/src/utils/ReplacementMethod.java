@@ -8,9 +8,8 @@ import model.Individual;
 public enum ReplacementMethod {
 	ReplaceAll, ChooseK, ChooseN;
 
-	public List<Individual> replace(List<Individual> population,
-			List<Individual> newGeneration, MethodPercentage replaceMethodOne,
-			MethodPercentage replaceMethodTwo) {
+	public List<Individual> replace(List<Individual> population, List<Individual> newGeneration,
+			MethodPercentage replaceMethodOne, MethodPercentage replaceMethodTwo) {
 
 		List<Individual> newPopulation = new ArrayList<Individual>();
 		int originalPopulationSize = population.size();
@@ -24,10 +23,10 @@ public enum ReplacementMethod {
 		case ChooseK:
 			int oldGenerationSize = originalPopulationSize - newGeneration.size();
 
-			newPopulation.addAll(replaceMethodOne.getMethod().getSelected(
-					population, (int) Math.floor(oldGenerationSize * replaceMethodOne.getPercentage())));
-			newPopulation.addAll(replaceMethodTwo.getMethod().getSelected(
-					population, (int) Math.ceil(oldGenerationSize * replaceMethodTwo.getPercentage())));
+			int methodSize = (int) (oldGenerationSize * replaceMethodOne.getPercentage());
+
+			newPopulation.addAll(replaceMethodOne.getMethod().getSelected(population, methodSize));
+			newPopulation.addAll(replaceMethodTwo.getMethod().getSelected(population, oldGenerationSize - methodSize));
 
 			newPopulation.addAll(newGeneration);
 
@@ -35,12 +34,12 @@ public enum ReplacementMethod {
 
 		case ChooseN:
 			population.addAll(newGeneration);
-
-			newPopulation.addAll(replaceMethodOne.getMethod().getSelected(
-					population, (int) Math.floor(originalPopulationSize * replaceMethodOne.getPercentage())));
-			newPopulation.addAll(replaceMethodTwo.getMethod().getSelected(
-					population, (int) Math.ceil(originalPopulationSize * replaceMethodTwo.getPercentage())));
-
+			int methodOneSize = (int) (originalPopulationSize * replaceMethodOne.getPercentage());
+			
+			newPopulation.addAll(replaceMethodOne.getMethod().getSelected(population, methodOneSize));
+			newPopulation.addAll(
+					replaceMethodTwo.getMethod().getSelected(population, originalPopulationSize - methodOneSize));
+			
 			break;
 
 		}

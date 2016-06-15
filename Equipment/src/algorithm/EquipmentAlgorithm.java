@@ -39,11 +39,10 @@ public class EquipmentAlgorithm {
 			selectedPopulation.clear();
 			crossedPopulation.clear();
 
+			int methodSize = (int) (k * this.selectionOne.getPercentage());
 			// select parents to combine
-			selectedPopulation.addAll(this.selectionOne.getMethod().getSelected(population,
-					(int) Math.floor(k * this.selectionOne.getPercentage())));
-			selectedPopulation.addAll(this.selectionTwo.getMethod().getSelected(population,
-					(int) Math.ceil(k * this.selectionTwo.getPercentage())));
+			selectedPopulation.addAll(this.selectionOne.getMethod().getSelected(population, methodSize));
+			selectedPopulation.addAll(this.selectionTwo.getMethod().getSelected(population, k - methodSize));
 			Collections.shuffle(selectedPopulation);
 
 			// create combinations
@@ -60,7 +59,7 @@ public class EquipmentAlgorithm {
 			// mutate
 			for (Individual crossedIndividual : crossedPopulation) {
 				double rand = Math.random();
-				if (rand > 0.5) {
+				if (rand < this.properties.getMutationPercentage()) {
 					this.properties.getMutationMethod().mutate(crossedIndividual);
 					((ProblemIndividual) crossedIndividual).calculateValues();
 				}

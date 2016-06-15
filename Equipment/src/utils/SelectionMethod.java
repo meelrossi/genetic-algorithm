@@ -7,7 +7,7 @@ import java.util.List;
 import model.Individual;
 
 public enum SelectionMethod {
-	Elitte,
+	Elite,
 	Random,
 	Roulette,
 	Universal,
@@ -21,9 +21,9 @@ public enum SelectionMethod {
 
 		switch(this) {
 
-		case Elitte:
+		case Elite:
 			selection.addAll(population);
-			Collections.sort(selection);
+			Collections.sort(selection, Collections.reverseOrder());
 			selection = selection.subList(0, n);
 
 			break;

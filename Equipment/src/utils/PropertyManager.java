@@ -23,6 +23,7 @@ public class PropertyManager {
 	private CombinationMethod combinationMethod;
 	private ReplacementMethod replacementMethod;
 	private int k;
+	private double mutationPercentage;
 
 	public PropertyManager() {
 		properties = new Properties();
@@ -49,44 +50,51 @@ public class PropertyManager {
 
 	private void loadProperties() {
 		this.selectionMethodOne = new MethodPercentage(
-				SelectionMethod.valueOf(properties.getProperty("selectionOne", "Elitte")),
-				Double.parseDouble(properties.getProperty("selectionOnePercentage", "1")));
+				SelectionMethod.valueOf(properties.getProperty("selection.one.type", "Elite")),
+				Double.parseDouble(properties.getProperty("selection.one.percentage", "1")));
 
 		if (selectionMethodOne.getPercentage() > 1) {
 			throw new RuntimeException("Invalid selectionOnePercentage argument. Must be between 0 and 1.");
 		}
 
 		this.selectionMethodTwo = new MethodPercentage(
-				SelectionMethod.valueOf(properties.getProperty("selectionTwo", "Roulette")),
+				SelectionMethod.valueOf(properties.getProperty("selection.two.type", "Roulette")),
 				1 - selectionMethodOne.getPercentage());
 
 		this.replacementMethodOne = new MethodPercentage(
-				SelectionMethod.valueOf(properties.getProperty("replacementOne", "Elitte")),
-				Double.parseDouble(properties.getProperty("replacementOnePercentage", "1")));
+				SelectionMethod.valueOf(properties.getProperty("replacement.one.type", "Elite")),
+				Double.parseDouble(properties.getProperty("replacement.one.percentage", "1")));
 
 		if (replacementMethodOne.getPercentage() > 1) {
 			throw new RuntimeException("Invalid replacementOnePercentage argument. Must be between 0 and 1.");
 		}
 
 		this.replacementMethodTwo = new MethodPercentage(
-				SelectionMethod.valueOf(properties.getProperty("replacementTwo", "Roulette")),
+				SelectionMethod.valueOf(properties.getProperty("replacement.two", "Roulette")),
 				1 - replacementMethodOne.getPercentage());
 
-		this.populationSize = Integer.parseInt(properties.getProperty("populationSize", "20"));
+		this.populationSize = Integer.parseInt(properties.getProperty("population.size", "20"));
 
-		this.mutationMethod = MutationMethod.valueOf(properties.getProperty("mutation", "Classic"));
+		this.mutationMethod = MutationMethod.valueOf(properties.getProperty("mutation.type", "Classic"));
 
-		this.cutoffCriteria = CutOffCriteriaEnum.valueOf(properties.getProperty("cutoffCriteria", "Generation"))
-				.getCriteriaClass(Double.parseDouble(properties.getProperty("cutoffParameter", "0")));
+		this.cutoffCriteria = CutOffCriteriaEnum.valueOf(properties.getProperty("cutoff.type", "Generation"))
+				.getCriteriaClass(Double.parseDouble(properties.getProperty("cutoff.parameter", "0")));
 
-		this.combinationMethod = CombinationMethod.valueOf(properties.getProperty("combination", "OnePoint"));
+		this.combinationMethod = CombinationMethod.valueOf(properties.getProperty("combination.type", "OnePoint"));
 
-		this.replacementMethod = ReplacementMethod.valueOf(properties.getProperty("replacementMethod", "ReplaceAll"));
-		this.k = Integer.parseInt(properties.getProperty("k", "20"));
+		this.replacementMethod = ReplacementMethod.valueOf(properties.getProperty("replacement.type", "ReplaceAll"));
+		this.k = Integer.parseInt(properties.getProperty("population.k", Integer.toString(this.populationSize)));
 
 		if (this.k > this.populationSize) {
 			throw new RuntimeException("Invalid k argument. Must be between 1 and populationSize.");
 		}
+		if (replacementMethod.equals(ReplacementMethod.ReplaceAll)) {
+			this.k = this.populationSize;
+		}
+		
+		this.mutationPercentage = Double.parseDouble(properties.getProperty("mutation.parameter", "0.1"));
+		
+		
 	}
 
 	public MethodPercentage getSelectionMethodOne() {
@@ -127,5 +135,9 @@ public class PropertyManager {
 
 	public int getK() {
 		return this.k;
+	}
+	
+	public double getMutationPercentage() {
+		return this.mutationPercentage;
 	}
 }

@@ -14,6 +14,10 @@ public class WarriorIndividual extends ProblemIndividual {
 	public WarriorIndividual(List<Gene> chromosome) {
 		super(chromosome);
 	}
+	
+	public WarriorIndividual(int id, List<Gene> chromosome) {
+		super(chromosome);
+	}
 
 	@Override
 	protected void setStrength() {
@@ -51,6 +55,6 @@ public class WarriorIndividual extends ProblemIndividual {
 
 		this.chromosome.forEach(gene -> cloneChromosome.add(gene.clone()));
 
-		return new WarriorIndividual(cloneChromosome);
+		return new WarriorIndividual(id, cloneChromosome);
 	}
 }
