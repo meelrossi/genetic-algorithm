@@ -10,6 +10,6 @@ public class Test {
 		EquipmentAlgorithm ea = new EquipmentAlgorithm();
 		Individual ind = ea.run();
 		
-		System.out.println(ind.getFitness());
+		System.out.println(ind.toString());
 	}
 }

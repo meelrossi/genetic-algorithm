@@ -51,5 +51,10 @@ public abstract class Individual implements Comparable<Individual> {
 	public double getAccumulatedAptitude() {
 		return accumulatedAptitude;
 	}
+	
+	@Override
+	public String toString() {
+		return "Individuo: " + this.id + "\n" + "Arma: " + (int) chromosome.get(0).getValue() + " Guantes: " + (int) chromosome.get(1).getValue() + " Pechera: " + (int) chromosome.get(2).getValue() + " Casco: " + (int) chromosome.get(3).getValue() + " Botas: " + (int) chromosome.get(4).getValue() + " Altura: " + chromosome.get(5).getValue() + "\nFitness: " + getFitness();
+	}
 
 }
