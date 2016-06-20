@@ -13,7 +13,7 @@ public enum ChromosomeIndexes {
 		this.index = index;
 	}
 	
-	int index() {
+	public int index() {
 		return this.index;
 	}
 }

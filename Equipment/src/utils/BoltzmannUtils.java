@@ -7,7 +7,7 @@ import model.Individual;
 public class BoltzmannUtils {
 
 	private static BoltzmannUtils instance;
-	private static double initialT = 10;
+	private static double initialT = 400;
 	private static double decreacingPercentage = 0.9;
 	private double T;
 	
@@ -29,8 +29,9 @@ public class BoltzmannUtils {
 			individual.setRelativeAptitude(relativeAptitude);
 			individual.setAccumulatedAptitude(accumulatedAptitude);
 		}
-
-		T = T * decreacingPercentage;
+		if (T > 1) {
+			T = T * decreacingPercentage;
+		}
 	}
 
 	private BoltzmannUtils() {

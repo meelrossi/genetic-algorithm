@@ -77,7 +77,7 @@ public enum SelectionMethod {
 		case Boltzmann:
 			BoltzmannUtils.instance().calculateForRoulette(population);
 
-			for (int i = 0; i < n; i++) {
+			for (int i = 0; selection.size() < n; i++) {
 				double r = Math.random();
 				boolean found = false;
 
@@ -149,11 +149,10 @@ public enum SelectionMethod {
 			}
 
 			break;
-
 		default:
 			break;
 		}
-		return selection;
+		return selection.subList(0, n);
 		
 	}
 }
