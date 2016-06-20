@@ -48,18 +48,11 @@ public class EquipmentAlgorithm {
 			// select parents to combine
 			selectedPopulation.addAll(this.selectionOne.getMethod().getSelected(population, methodSize));
 			selectedPopulation.addAll(this.selectionTwo.getMethod().getSelected(population, k - methodSize));
-			Collections.shuffle(selectedPopulation);
+			Collections.shuffle(selectedPopulation, randNum);
 
 			// create combinations
-			while (crossedPopulation.size() < k) {
-				int crossedPopulationSize = crossedPopulation.size();
-
-				List<List<Gene>> newChromosomes = this.properties.getCombinationMethod().combine(
-						selectedPopulation.get(crossedPopulationSize).getChromosome(),
-						selectedPopulation.get(crossedPopulationSize + 1).getChromosome());
-
-				newChromosomes.forEach(newChromosome -> crossedPopulation.add(new WarriorIndividual(newChromosome)));
-			}
+			List<List<Gene>> newChromosomes = this.properties.getCombineSelection().getCombined(selectedPopulation, this.properties.getCombinationMethod());
+			newChromosomes.forEach(newChromosome -> crossedPopulation.add(new WarriorIndividual(newChromosome)));
 
 			// mutate
 			for (Individual crossedIndividual : crossedPopulation) {

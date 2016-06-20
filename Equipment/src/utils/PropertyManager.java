@@ -22,6 +22,7 @@ public class PropertyManager {
 	private CutOffCriteria cutoffCriteria;
 	private CombinationMethod combinationMethod;
 	private ReplacementMethod replacementMethod;
+	private CombineSelection combineSelection;
 	private int k;
 	private double mutationPercentage;
 
@@ -84,7 +85,9 @@ public class PropertyManager {
 
 		this.replacementMethod = ReplacementMethod.valueOf(properties.getProperty("replacement.type", "ReplaceAll"));
 		this.k = Integer.parseInt(properties.getProperty("population.k", Integer.toString(this.populationSize)));
-
+		
+		this.combineSelection = CombineSelection.valueOf(properties.getProperty("combination.selection", "Combine2"));
+	
 		if (this.k > this.populationSize) {
 			throw new RuntimeException("Invalid k argument. Must be between 1 and populationSize.");
 		}
@@ -139,5 +142,9 @@ public class PropertyManager {
 	
 	public double getMutationPercentage() {
 		return this.mutationPercentage;
+	}
+	
+	public CombineSelection getCombineSelection() {
+		return this.combineSelection;
 	}
 }
