@@ -26,9 +26,9 @@ public class EquipmentAlgorithm {
 	public static Random randNum;
 
 	public EquipmentAlgorithm() {
-		randNum = new Random();
-		randNum.setSeed(38167053);
 		this.properties = new PropertyManager();
+		randNum = new Random();
+		randNum.setSeed(this.properties.getSeed());
 		this.selectionOne = this.properties.getSelectionMethodOne();
 		this.selectionTwo = this.properties.getSelectionMethodTwo();
 

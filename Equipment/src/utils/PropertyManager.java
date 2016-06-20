@@ -24,6 +24,7 @@ public class PropertyManager {
 	private ReplacementMethod replacementMethod;
 	private CombineSelection combineSelection;
 	private int k;
+	private long seed;
 	private double mutationPercentage;
 
 	public PropertyManager() {
@@ -95,6 +96,8 @@ public class PropertyManager {
 			this.k = this.populationSize;
 		}
 		
+		this.seed = Long.parseLong(properties.getProperty("seed", "38167053"));
+		
 		this.mutationPercentage = Double.parseDouble(properties.getProperty("mutation.parameter", "0.1"));
 		
 		
@@ -146,5 +149,9 @@ public class PropertyManager {
 	
 	public CombineSelection getCombineSelection() {
 		return this.combineSelection;
+	}
+	
+	public long getSeed() {
+		return this.seed;
 	}
 }
