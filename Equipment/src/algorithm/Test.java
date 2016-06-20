@@ -1,5 +1,7 @@
 package algorithm;
 
+import java.util.Random;
+
 import model.Individual;
 
 public class Test {

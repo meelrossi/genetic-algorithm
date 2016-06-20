@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import algorithm.EquipmentAlgorithm;
 import model.Individual;
 
 public enum SelectionMethod {
@@ -30,7 +31,7 @@ public enum SelectionMethod {
 
 		case Random:
 			for (int i = 0; i < n; i++) {
-				int index = (int) Math.random() * population.size();
+				int index = (int) EquipmentAlgorithm.randNum.nextDouble() * population.size();
 				selection.add(population.get(index).clone());
 			}
 
@@ -40,7 +41,7 @@ public enum SelectionMethod {
 			GeneticAlgorithmUtils.setAccumulatedAptitude(population);
 
 			for (int i = 0; i < n; i++) {
-				double rand = Math.random();
+				double rand = EquipmentAlgorithm.randNum.nextDouble();
 				boolean found = false;
 
 				for (int j = 0; j < population.size() && !found; j++) {
@@ -56,7 +57,7 @@ public enum SelectionMethod {
 
 		case Universal:
 			GeneticAlgorithmUtils.setAccumulatedAptitude(population);
-			double rand = Math.random();
+			double rand = EquipmentAlgorithm.randNum.nextDouble();
 
 			for (int i = 1; i <= n; i++) {
 				boolean found = false;
@@ -78,7 +79,7 @@ public enum SelectionMethod {
 			BoltzmannUtils.instance().calculateForRoulette(population);
 
 			for (int i = 0; selection.size() < n; i++) {
-				double r = Math.random();
+				double r = EquipmentAlgorithm.randNum.nextDouble();
 				boolean found = false;
 
 				for (int j = 0; j < population.size() && !found; j++) {
@@ -95,8 +96,8 @@ public enum SelectionMethod {
 		case DeterministicTournament:
 
 			for (int i = 0; i < n; i++) {
-				Individual ind1 = population.get((int) Math.random() * population.size());
-				Individual ind2 = population.get((int) Math.random() * population.size());
+				Individual ind1 = population.get((int) EquipmentAlgorithm.randNum.nextDouble() * population.size());
+				Individual ind2 = population.get((int) EquipmentAlgorithm.randNum.nextDouble() * population.size());
 
 				if (ind1.compareTo(ind2) > 0) {
 					selection.add(ind1.clone());
@@ -110,9 +111,9 @@ public enum SelectionMethod {
 		case ProbabilisticTournament:
 
 			for (int i = 0; i < n; i++) {
-				double decisionRand = Math.random();
-				Individual ind1 = population.get((int) Math.random() * population.size());
-				Individual ind2 = population.get((int) Math.random() * population.size());
+				double decisionRand = EquipmentAlgorithm.randNum.nextDouble();
+				Individual ind1 = population.get((int) EquipmentAlgorithm.randNum.nextDouble() * population.size());
+				Individual ind2 = population.get((int) EquipmentAlgorithm.randNum.nextDouble() * population.size());
 
 				if (decisionRand < 0.75) {
 					if (ind1.compareTo(ind2) > 0) {
@@ -136,7 +137,7 @@ public enum SelectionMethod {
 			GeneticAlgorithmUtils.setRankingAptitude(populationAux);
 
 			for (int i = 0; i < n; i++) {
-				double rankingRand = Math.random();
+				double rankingRand = EquipmentAlgorithm.randNum.nextDouble();
 				boolean found = false;
 
 				for (int j = 0; j < populationAux.size() && !found; j++) {

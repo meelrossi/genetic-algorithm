@@ -3,6 +3,7 @@ package algorithm;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 import model.Equipment;
 import model.EquipmentManager;
@@ -21,8 +22,12 @@ public class EquipmentAlgorithm {
 	private PropertyManager properties;
 	private MethodPercentage selectionOne;
 	private MethodPercentage selectionTwo;
+	
+	public static Random randNum;
 
 	public EquipmentAlgorithm() {
+		randNum = new Random();
+		randNum.setSeed(38167053);
 		this.properties = new PropertyManager();
 		this.selectionOne = this.properties.getSelectionMethodOne();
 		this.selectionTwo = this.properties.getSelectionMethodTwo();
@@ -58,7 +63,7 @@ public class EquipmentAlgorithm {
 
 			// mutate
 			for (Individual crossedIndividual : crossedPopulation) {
-				double rand = Math.random();
+				double rand = randNum.nextDouble();
 				if (rand < this.properties.getMutationPercentage()) {
 					this.properties.getMutationMethod().mutate(crossedIndividual);
 					((ProblemIndividual) crossedIndividual).calculateValues();
@@ -76,11 +81,11 @@ public class EquipmentAlgorithm {
 
 	public List<Individual> getWarriorPopulation() {
 		List<Individual> warriors = new ArrayList<Individual>();
-		List<List<Equipment>> equipments = EquipmentManager.instance().getEquipments();
+		List<List<Equipment>> equipments = EquipmentManager.instance().getEquipments();		
 		for (int i = 0; i < properties.getPopulationSize(); i++) {
 			List<Gene> chromosome = new ArrayList<Gene>();
-			equipments.forEach(list -> chromosome.add(new Gene(Math.random() * list.size(), 0, list.size())));
-			chromosome.add(new Gene(Math.random() * (MAX_HEIGHT - MIN_HEIGHT) + MIN_HEIGHT, MIN_HEIGHT, MAX_HEIGHT));
+			equipments.forEach(list -> chromosome.add(new Gene(randNum.nextDouble() * list.size(), 0, list.size())));
+			chromosome.add(new Gene(randNum.nextDouble() * (MAX_HEIGHT - MIN_HEIGHT) + MIN_HEIGHT, MIN_HEIGHT, MAX_HEIGHT));
 			//chromosome.add(new Gene(1.95, MIN_HEIGHT, MAX_HEIGHT));
 			warriors.add(new WarriorIndividual(chromosome));
 		}

@@ -3,6 +3,7 @@ package utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import algorithm.EquipmentAlgorithm;
 import model.Gene;
 
 public enum CombinationMethod {
@@ -25,7 +26,7 @@ public enum CombinationMethod {
 
 		switch (this) {
 		case OnePoint:
-			locus1 = (int) Math.random() * end;
+			locus1 = (int) EquipmentAlgorithm.randNum.nextDouble() * end;
 
 			newChromosome1.addAll(chromosome1.subList(0, locus1));
 			newChromosome1.addAll(chromosome2.subList(locus1, end));
@@ -36,8 +37,8 @@ public enum CombinationMethod {
 			break;
 
 		case TwoPoints:
-			locus1 = (int) Math.random() * end;
-			locus2 = (int) Math.random() * (end - locus1) + locus1;
+			locus1 = (int) EquipmentAlgorithm.randNum.nextDouble() * end;
+			locus2 = (int) EquipmentAlgorithm.randNum.nextDouble() * (end - locus1) + locus1;
 
 			newChromosome1.addAll(chromosome1.subList(0, locus1));
 			newChromosome1.addAll(chromosome2.subList(locus1, locus2));
@@ -49,8 +50,8 @@ public enum CombinationMethod {
 
 			break;
 		case Anular:
-			locus1 = (int) Math.random() * end;
-			segment = (int) Math.random() * end / 2;
+			locus1 = (int) EquipmentAlgorithm.randNum.nextDouble() * end;
+			segment = (int) EquipmentAlgorithm.randNum.nextDouble() * end / 2;
 
 			if (locus1 + segment > end) {
 				int overflow = locus1 + segment - end;
@@ -75,7 +76,7 @@ public enum CombinationMethod {
 			break;
 		case Uniform:
 			for (int i = 0; i < end; i++) {
-				double rand = Math.random();
+				double rand = EquipmentAlgorithm.randNum.nextDouble();
 				if (rand > 0.5) {
 					newChromosome2.add(chromosome1.get(i));
 					newChromosome1.add(chromosome2.get(i));

@@ -1,5 +1,7 @@
 package model;
 
+import algorithm.EquipmentAlgorithm;
+
 public class Gene {
 	private double value;
 	private double minValue;
@@ -24,7 +26,7 @@ public class Gene {
 	}
 
 	public void mutate() {
-		this.value = Math.random() * (this.maxValue - this.minValue) + this.minValue;
+		this.value = EquipmentAlgorithm.randNum.nextDouble() * (this.maxValue - this.minValue) + this.minValue;
 	}
 
 	public Gene clone() {

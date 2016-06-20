@@ -2,6 +2,7 @@ package utils;
 
 import java.util.List;
 
+import algorithm.EquipmentAlgorithm;
 import model.Gene;
 import model.Individual;
 
@@ -16,7 +17,7 @@ public enum MutationMethod {
 
 		case NonUniform:
 			for (geneIndex = 0; geneIndex < chromosome.size(); geneIndex++) {
-				double rand = Math.random();
+				double rand = EquipmentAlgorithm.randNum.nextDouble();
 				if (rand > 0.5) {
 					chromosome.get(geneIndex).mutate();
 				}
@@ -25,7 +26,7 @@ public enum MutationMethod {
 			break;
 
 		case Classic:
-			geneIndex = (int) Math.random() * chromosome.size();
+			geneIndex = (int) EquipmentAlgorithm.randNum.nextDouble() * chromosome.size();
 			chromosome.get(geneIndex).mutate();
 
 			break;
