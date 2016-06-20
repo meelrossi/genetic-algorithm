@@ -81,6 +81,7 @@ public class EquipmentAlgorithm {
 			List<Gene> chromosome = new ArrayList<Gene>();
 			equipments.forEach(list -> chromosome.add(new Gene(Math.random() * list.size(), 0, list.size())));
 			chromosome.add(new Gene(Math.random() * (MAX_HEIGHT - MIN_HEIGHT) + MIN_HEIGHT, MIN_HEIGHT, MAX_HEIGHT));
+			//chromosome.add(new Gene(1.95, MIN_HEIGHT, MAX_HEIGHT));
 			warriors.add(new WarriorIndividual(chromosome));
 		}
 		return warriors;
