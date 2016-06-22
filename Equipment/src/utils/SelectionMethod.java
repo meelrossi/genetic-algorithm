@@ -78,7 +78,7 @@ public enum SelectionMethod {
 		case Boltzmann:
 			BoltzmannUtils.instance().calculateForRoulette(population);
 
-			for (int i = 0; selection.size() < n; i++) {
+			while (selection.size() < n) {
 				double r = EquipmentAlgorithm.randNum.nextDouble();
 				boolean found = false;
 
