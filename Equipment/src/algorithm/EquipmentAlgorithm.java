@@ -40,6 +40,10 @@ public class EquipmentAlgorithm {
 		List<Individual> crossedPopulation = new ArrayList<Individual>();
 		int k = this.properties.getK();
 
+		// mean and deviation
+		int runCount = 0;
+		printMeanAndDeviation(runCount);
+
 		while (!this.properties.getCutOffCriteria().shouldEnd(this.population)) {
 			selectedPopulation.clear();
 			crossedPopulation.clear();
@@ -66,6 +70,12 @@ public class EquipmentAlgorithm {
 			// replace for new generation creation
 			this.population = this.properties.getReplacementMethod().replace(population, crossedPopulation,
 					this.properties.getReplacementMethodOne(), this.properties.getReplacementMethodTwo());
+
+			// mean and deviation
+			runCount++;
+			if (runCount % 20 == 0) {
+				printMeanAndDeviation(runCount);
+			}
 		}
 
 		Collections.sort(this.population, Collections.reverseOrder());
@@ -83,5 +93,20 @@ public class EquipmentAlgorithm {
 			warriors.add(new WarriorIndividual(chromosome));
 		}
 		return warriors;
+	}
+
+	private void printMeanAndDeviation(int runCount) {
+		double mean = 0.0;
+		double deviation = 0.0;
+		int n = this.population.size();
+		for (Individual p : this.population) {
+			mean += p.getFitness();
+		}
+		mean = mean / n;
+		for (Individual p : this.population) {
+			deviation += Math.pow(p.getFitness() - mean, 2);
+		}
+		deviation = deviation / n;
+		System.out.println(runCount + "\t" + mean + "\t" + deviation);
 	}
 }
