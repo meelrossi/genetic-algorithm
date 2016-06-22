@@ -99,14 +99,17 @@ public class EquipmentAlgorithm {
 		double mean = 0.0;
 		double deviation = 0.0;
 		int n = this.population.size();
+
 		for (Individual p : this.population) {
 			mean += p.getFitness();
 		}
 		mean = mean / n;
+
 		for (Individual p : this.population) {
 			deviation += Math.pow(p.getFitness() - mean, 2);
 		}
-		deviation = deviation / n;
+		deviation = Math.sqrt(deviation / n);
+
 		System.out.println(runCount + "\t" + mean + "\t" + deviation);
 	}
 }
